@@ -16,19 +16,19 @@
   - hash 模式是用 createWebHashHistory() 创建的，在 URL 之前使用了一个哈希字符 `#`，通过监听 hash 变化来达到路由跳转
   - 用 createWebHistory() 创建 HTML5 的 history 模式，vue-router 利用 HTML5 的 history api (去掉哈希字符 `#`)
 
-  ```js
-  // index.js 文件
-  import {
-    createRouter,
-    //createWebHashHistory,
-    createWebHistory,
-  } from "vue-router";
+```js
+// index.js 文件
+import {
+  createRouter,
+  //createWebHashHistory,
+  createWebHistory,
+} from "vue-router";
 
-  const router = createRouter({
-    history: createWebHistory(),
-    routes,
-  });
-  ```
+const router = createRouter({
+  history: createWebHistory(),
+  routes,
+});
+```
 
 - 如何进行路由跳转
   - router-link 标签，最主要的属性 to：用于指定跳转的路径
@@ -77,7 +77,7 @@ created() {
 
   - 需要修改的文件
 
-  ```js
+```js
   // index.js 文件
   {
     path: "/lianxi",
@@ -90,11 +90,11 @@ created() {
       component: Test,
     },
   ],
-  ```
+```
 
-  App.vue`<router-link to="/lianxi/test">Go to Lianxi</router-link>`
+App.vue`<router-link to="/lianxi/test">Go to Lianxi</router-link>`
 
-  Lianxi.vue`<router-view></router-view>`
+Lianxi.vue`<router-view></router-view>`
 
 - 如何传递参数
   - 通过调用 push 方法时带上 params 或者 query 属性，来传递参数
@@ -104,17 +104,17 @@ created() {
   - 全局路由守卫：router.beforeEach 每一个路由进入前触发。router.afterEach 每一个路由进后前触发。
     - to 是指要跳转到的路由，from 是指从哪个路由要跳转的路由。
 
-  ```js
-  router.beforeEach((to, from) => {
-    console.log(to);
-    if (to.path === "/One") {
-      return false;
-    }
-  });
-  ```
+```js
+router.beforeEach((to, from) => {
+  console.log(to);
+  if (to.path === "/One") {
+    return false;
+  }
+});
+```
 
-  - 组件内路由守卫：beforeRouteEnter 当前路由进入前触发，beforeRouteUpdate 在当前路由改变，但是该组件被复用时调用，beforeRouteLeave 离开当前路由时触发
-    - 是在 Xxx.vue 文件里写 beforeRouteEnter。
+- 组件内路由守卫：beforeRouteEnter 当前路由进入前触发，beforeRouteUpdate 在当前路由改变，但是该组件被复用时调用，beforeRouteLeave 离开当前路由时触发
+  - 是在 Xxx.vue 文件里写 beforeRouteEnter。
 
 ```js
   beforeRouteEnter(to, from, next) {
