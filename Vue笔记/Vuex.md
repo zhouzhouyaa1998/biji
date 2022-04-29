@@ -2,7 +2,7 @@
 
 ## 安装
 
-使用 npm: `npm install vuex@next --save`
+使用 npm: `pnpm install vuex@next --save`
 
 ## 使用
 
