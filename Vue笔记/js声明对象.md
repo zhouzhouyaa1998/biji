@@ -102,3 +102,45 @@ const c = Object.assign({}, { msg: "aaaa" }, { value: "44444" }, a); //Object.cr
 console.log(c);
 // {msg: 'aaaa', value: '44444'} 后面同名的属性会覆盖前面的。
 ```
+
+## 可枚举性
+
+对象的每个属性都有一个描述对象（Descriptor），用来控制该属性的行为。Object.getOwnPropertyDescriptor 方法可以获取该属性的描述对象。
+
+```js
+let obj = { foo: 123 };
+Object.getOwnPropertyDescriptor(obj, "foo");
+//  {
+//    value: 123,
+//    writable: true,
+//    enumerable: true,
+//    configurable: true
+//  }
+```
+
+描述对象的 enumerable 属性，称为“可枚举性”，如果该属性为 false，就表示某些操作会忽略当前属性。
+
+- 目前，有四个操作会忽略 enumerable 为 false 的属性。
+  - for...in 循环：只遍历对象自身的和继承的可枚举的属性。
+  - Object.keys()：返回对象自身的所有可枚举的属性的键名。
+  - JSON.stringify()：只串行化对象自身的可枚举的属性。
+  - Object.assign()： 忽略 enumerable 为 false 的属性，只拷贝对象自身的可枚举的属性。
+
+ES2017 引入了跟 Object.keys 配套的 Object.values 和 Object.entries，作为遍历一个对象的补充手段，供 for...of 循环使用。
+
+```js
+let { keys, values, entries } = Object;
+let obj = { a: 1, b: 2, c: 3 };
+
+for (let key of keys(obj)) {
+  console.log(key); // 'a', 'b', 'c'
+}
+
+for (let value of values(obj)) {
+  console.log(value); // 1, 2, 3
+}
+
+for (let [key, value] of entries(obj)) {
+  console.log([key, value]); // ['a', 1], ['b', 2], ['c', 3]
+}
+```
